@@ -1,6 +1,6 @@
 # 📈 Muon vs AdamW: Optimizer Scaling Dynamics in Transformer Training
 
-**English** | [中文版本](README_zh.md)
+
 
 This repository contains the full LaTeX source for our empirical study:
 
