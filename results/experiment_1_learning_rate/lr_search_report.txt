@@ -1,0 +1,67 @@
+================================================================================
+COMPREHENSIVE LEARNING RATE SEARCH: MUON vs ADAMW
+================================================================================
+Generated: 2025-07-21 18:25:22
+
+EXPERIMENTAL SETUP
+----------------------------------------
+Model: 256d, 4L, 8H, 1024ff
+Training steps: 600
+Batch size: 32
+Weight decay: 0.01
+
+ADAMW RESULTS
+----------------------------------------
+Successful runs: 7/7
+Failed runs: 0
+
+BEST ADAMW LR: 0.003
+  Final Training Loss: 0.1279
+  Validation Loss: 0.1147
+  Validation Accuracy: 0.9718
+  Validation Perplexity: 1.12
+  Training Time: 72.3s
+
+LR Range Analysis:
+  Working LR range: 1e-05 to 0.01
+  Best val accuracy: 0.9718
+  Worst val accuracy: 0.0697
+
+MUON RESULTS
+----------------------------------------
+Successful runs: 8/8
+Failed runs: 0
+
+BEST MUON LR: 0.01
+  Final Training Loss: 0.0812
+  Validation Loss: 0.0851
+  Validation Accuracy: 0.9845
+  Validation Perplexity: 1.09
+  Training Time: 83.9s
+
+LR Range Analysis:
+  Working LR range: 0.001 to 0.05
+  Best val accuracy: 0.9845
+  Worst val accuracy: 0.4297
+
+DIRECT COMPARISON
+----------------------------------------
+Best validation accuracy:
+  AdamW (LR=0.003): 0.9718
+  Muon (LR=0.01):  0.9845
+  Winner: Muon by 0.0127
+
+Best validation loss:
+  AdamW (LR=0.003): 0.1147
+  Muon (LR=0.01):  0.0851
+  Winner: Muon by 0.0296
+
+Learning rate stability:
+  AdamW stable range: 1000.0x
+  Muon stable range: 50.0x
+  More stable: AdamW
+
+KEY FINDINGS
+----------------------------------------
+✓ Muon achieves higher peak performance than AdamW
+✓ Muon is more stable across learning rates

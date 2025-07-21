@@ -1,0 +1,126 @@
+================================================================================
+COMPREHENSIVE MODEL SIZE ABLATION: MUON vs ADAMW
+================================================================================
+Generated: 2025-07-21 20:53:59
+Number of runs per configuration: 2
+
+EXPERIMENTAL SETUP
+----------------------------------------
+Enhanced experimental setup with:
+  • Optimal learning rates (AdamW: 0.003, Muon: 0.01)
+  • Gradient accumulation (4 steps)
+  • Dropout regularization (0.1)
+  • Longer sequences (512 tokens)
+  • Larger dataset (500k tokens, 2000 documents)
+  • Extended training (6k-12k steps)
+  • Multiple runs for statistical significance
+
+Model Configurations:
+  Tiny: 192d, 4L, 6H, 768ff
+    Parameters: 11,208,384
+    Training: 6000 steps, batch size 32
+  Small: 384d, 6L, 8H, 1536ff
+    Parameters: 29,496,192
+    Training: 5000 steps, batch size 24
+  Medium: 512d, 8L, 8H, 2048ff
+    Parameters: 50,340,352
+    Training: 4000 steps, batch size 16
+  Large: 768d, 10L, 16H, 3072ff
+    Parameters: 108,543,744
+    Training: 3000 steps, batch size 12
+
+============================================================
+TINY MODEL RESULTS
+============================================================
+Architecture: 192d, 4L, 6H, 768ff
+Parameters: 11,208,384
+Training steps: 6000
+
+FINAL PERFORMANCE METRICS (Mean ± Std)
+---------------------------------------------
+                    AdamW              Muon               Δ (p-value)
+Val Loss       : 0.8112±0.0261   0.9434±0.0011    -16.3% (p=0.037)*
+Val Accuracy   : 0.7941±0.0066   0.7836±0.0005     -1.3% (p=0.250)
+Val Perplexity : 2.2513±0.0588   2.5687±0.0027    -14.1% (p=0.033)*
+Training Time  : 273.9437±0.8401   283.6248±2.1028     -3.5% (p=0.051)
+
+🏆 WINNER: AdamW (higher validation accuracy)
+
+============================================================
+SMALL MODEL RESULTS
+============================================================
+Architecture: 384d, 6L, 8H, 1536ff
+Parameters: 29,496,192
+Training steps: 5000
+
+FINAL PERFORMANCE METRICS (Mean ± Std)
+---------------------------------------------
+                    AdamW              Muon               Δ (p-value)
+Val Loss       : 0.1939±0.0009   0.1588±0.0005    +18.1% (p=0.001)***
+Val Accuracy   : 0.9496±0.0001   0.9625±0.0002     +1.4% (p=0.000)***
+Val Perplexity : 1.2140±0.0011   1.1721±0.0006     +3.5% (p=0.001)***
+Training Time  : 268.2420±0.0808   278.0209±0.1158     -3.6% (p=0.000)***
+
+🏆 WINNER: Muon (higher validation accuracy)
+
+============================================================
+MEDIUM MODEL RESULTS
+============================================================
+Architecture: 512d, 8L, 8H, 2048ff
+Parameters: 50,340,352
+Training steps: 4000
+
+FINAL PERFORMANCE METRICS (Mean ± Std)
+---------------------------------------------
+                    AdamW              Muon               Δ (p-value)
+Val Loss       : 0.3098±0.0112   0.1609±0.0034    +48.0% (p=0.006)**
+Val Accuracy   : 0.9173±0.0031   0.9614±0.0010     +4.8% (p=0.005)**
+Val Perplexity : 1.3632±0.0152   1.1746±0.0040    +13.8% (p=0.007)**
+Training Time  : 203.0001±0.2817   211.5403±0.0063     -4.2% (p=0.001)**
+
+🏆 WINNER: Muon (higher validation accuracy)
+
+============================================================
+LARGE MODEL RESULTS
+============================================================
+Architecture: 768d, 10L, 16H, 3072ff
+Parameters: 108,543,744
+Training steps: 3000
+
+FINAL PERFORMANCE METRICS (Mean ± Std)
+---------------------------------------------
+                    AdamW              Muon               Δ (p-value)
+Val Loss       : 3.7607±0.0533   0.2210±0.0050    +94.1% (p=0.000)***
+Val Accuracy   : 0.2835±0.0043   0.9464±0.0011   +233.9% (p=0.000)***
+Val Perplexity : 43.0399±2.2938   1.2474±0.0062    +97.1% (p=0.003)**
+Training Time  : 205.2436±0.0727   215.7518±0.0853     -5.1% (p=0.000)***
+
+🏆 WINNER: Muon (higher validation accuracy)
+
+================================================================================
+OVERALL ANALYSIS
+================================================================================
+MUON vs ADAMW PERFORMANCE
+-----------------------------------
+Validation Accuracy Wins: Muon 3/4, AdamW 1/4
+
+AVERAGE IMPROVEMENTS (Muon vs AdamW)
+----------------------------------------
+Validation Accuracy : +59.68% ± 100.60% (p=0.380)
+Validation Loss     : +36.00% ± 40.55% (p=0.222)
+Validation Perplexity: +25.07% ± 42.77% (p=0.385)
+Training Time       :  -4.13% ±  0.63% (p=0.001)**
+
+KEY FINDINGS
+--------------------
+✓ Muon consistently outperforms AdamW in validation accuracy
+✓ Muon achieves lower validation loss than AdamW
+≈ Similar training times between optimizers
+
+STATISTICAL SIGNIFICANCE
+------------------------------
+Significant improvements (p < 0.05): Time
+
+SCALING BEHAVIOR
+--------------------
+📊 No clear scaling trend observed

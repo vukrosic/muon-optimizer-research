@@ -1,0 +1,242 @@
+🔍 Device: CUDA
+GPU: NVIDIA GeForce RTX 4090
+Memory: 25.3 GB
+🌱 Set all seeds to 42
+
+🚀 Starting comprehensive model size ablation with 2 runs per configuration
+⏱️ Estimated time: 2-4 hours (depending on hardware)
+💾 Results will be automatically saved with timestamps
+🚀 COMPREHENSIVE ABLATION: 2 runs per configuration
+================================================================================
+📊 Using optimal learning rates:
+   AdamW: 0.003
+   Muon:  0.01
+🔬 Enhanced with: gradient accumulation, dropout, longer training
+================================================================================
+
+================================================================================
+🔬 TESTING TINY MODEL
+   Architecture: 192d, 4L, 6H, 768ff
+   Training: 6000 steps, batch size 32
+   Data: 500,000 tokens, seq_len 512
+================================================================================
+📦 Loading cached data from data_cache/tokenized_data_2000_500000.pkl
+✅ Loaded 2000 documents, 500,000 tokens from cache
+
+📊 ADAMW Run 1/2
+
+🚀 Training ADAMW on Tiny (Run 1)
+🌱 Set all seeds to 42
+  📊 Total parameters: 11,208,384
+ADAMW: 100%|██████████| 6000/6000 [04:34<00:00, 21.84it/s, loss=1.7671, acc=0.571, ppl=5.9, lr=2.72e-03]    
+  ⏱️ Training completed in 274.8 seconds
+
+  📊 Final - Loss: 0.8373, Acc: 0.7875, PPL: 2.31
+
+📊 ADAMW Run 2/2
+
+🚀 Training ADAMW on Tiny (Run 2)
+🌱 Set all seeds to 1042
+  📊 Total parameters: 11,208,384
+ADAMW: 100%|██████████| 6000/6000 [04:33<00:00, 21.97it/s, loss=1.7058, acc=0.576, ppl=5.5, lr=2.72e-03]    
+  ⏱️ Training completed in 273.1 seconds
+
+  📊 Final - Loss: 0.7851, Acc: 0.8006, PPL: 2.19
+
+📊 MUON Run 1/2
+
+🚀 Training MUON on Tiny (Run 1)
+🌱 Set all seeds to 42
+  📊 Total parameters: 11,208,384
+  Muon parameters: 1,769,472
+  AdamW parameters: 9,438,912
+MUON: 100%|██████████| 6000/6000 [04:45<00:00, 21.00it/s, loss=1.8745, acc=0.569, ppl=6.5, lr=9.07e-03]    
+  ⏱️ Training completed in 285.7 seconds
+
+  📊 Final - Loss: 0.9444, Acc: 0.7830, PPL: 2.57
+
+📊 MUON Run 2/2
+
+🚀 Training MUON on Tiny (Run 2)
+🌱 Set all seeds to 1042
+  📊 Total parameters: 11,208,384
+  Muon parameters: 1,769,472
+  AdamW parameters: 9,438,912
+MUON: 100%|██████████| 6000/6000 [04:41<00:00, 21.31it/s, loss=1.8783, acc=0.568, ppl=6.5, lr=9.07e-03]    
+  ⏱️ Training completed in 281.5 seconds
+
+  📊 Final - Loss: 0.9423, Acc: 0.7841, PPL: 2.57
+
+================================================================================
+🔬 TESTING SMALL MODEL
+   Architecture: 384d, 6L, 8H, 1536ff
+   Training: 5000 steps, batch size 24
+   Data: 500,000 tokens, seq_len 512
+================================================================================
+📦 Loading cached data from data_cache/tokenized_data_2000_500000.pkl
+✅ Loaded 2000 documents, 500,000 tokens from cache
+
+📊 ADAMW Run 1/2
+
+🚀 Training ADAMW on Small (Run 1)
+🌱 Set all seeds to 42
+  📊 Total parameters: 29,496,192
+ADAMW: 100%|██████████| 5000/5000 [04:28<00:00, 18.65it/s, loss=0.5567, acc=0.850, ppl=1.7, lr=2.72e-03]    
+  ⏱️ Training completed in 268.2 seconds
+
+  📊 Final - Loss: 0.1948, Acc: 0.9494, PPL: 1.22
+
+📊 ADAMW Run 2/2
+
+🚀 Training ADAMW on Small (Run 2)
+🌱 Set all seeds to 1042
+  📊 Total parameters: 29,496,192
+ADAMW: 100%|██████████| 5000/5000 [04:28<00:00, 18.63it/s, loss=0.6559, acc=0.826, ppl=1.9, lr=2.72e-03]    
+  ⏱️ Training completed in 268.3 seconds
+
+  📊 Final - Loss: 0.1930, Acc: 0.9497, PPL: 1.21
+
+📊 MUON Run 1/2
+
+🚀 Training MUON on Small (Run 1)
+🌱 Set all seeds to 42
+  📊 Total parameters: 29,496,192
+  Muon parameters: 10,616,832
+  AdamW parameters: 18,879,360
+MUON: 100%|██████████| 5000/5000 [04:37<00:00, 17.99it/s, loss=0.5100, acc=0.874, ppl=1.7, lr=9.07e-03]    
+  ⏱️ Training completed in 277.9 seconds
+
+  📊 Final - Loss: 0.1582, Acc: 0.9626, PPL: 1.17
+
+📊 MUON Run 2/2
+
+🚀 Training MUON on Small (Run 2)
+🌱 Set all seeds to 1042
+  📊 Total parameters: 29,496,192
+  Muon parameters: 10,616,832
+  AdamW parameters: 18,879,360
+MUON: 100%|██████████| 5000/5000 [04:38<00:00, 17.98it/s, loss=0.5751, acc=0.858, ppl=1.8, lr=9.07e-03]    
+  ⏱️ Training completed in 278.1 seconds
+
+  📊 Final - Loss: 0.1593, Acc: 0.9623, PPL: 1.17
+
+================================================================================
+🔬 TESTING MEDIUM MODEL
+   Architecture: 512d, 8L, 8H, 2048ff
+   Training: 4000 steps, batch size 16
+   Data: 500,000 tokens, seq_len 512
+================================================================================
+📦 Loading cached data from data_cache/tokenized_data_2000_500000.pkl
+✅ Loaded 2000 documents, 500,000 tokens from cache
+
+📊 ADAMW Run 1/2
+
+🚀 Training ADAMW on Medium (Run 1)
+🌱 Set all seeds to 42
+  📊 Total parameters: 50,340,352
+ADAMW: 100%|██████████| 4000/4000 [03:23<00:00, 19.68it/s, loss=0.7908, acc=0.790, ppl=2.2, lr=2.72e-03]   
+  ⏱️ Training completed in 203.3 seconds
+
+  📊 Final - Loss: 0.3210, Acc: 0.9143, PPL: 1.38
+
+📊 ADAMW Run 2/2
+
+🚀 Training ADAMW on Medium (Run 2)
+🌱 Set all seeds to 1042
+  📊 Total parameters: 50,340,352
+ADAMW: 100%|██████████| 4000/4000 [03:22<00:00, 19.73it/s, loss=0.7070, acc=0.812, ppl=2.0, lr=2.72e-03]   
+  ⏱️ Training completed in 202.7 seconds
+
+  📊 Final - Loss: 0.2986, Acc: 0.9204, PPL: 1.35
+
+📊 MUON Run 1/2
+
+🚀 Training MUON on Medium (Run 1)
+🌱 Set all seeds to 42
+  📊 Total parameters: 50,340,352
+  Muon parameters: 25,165,824
+  AdamW parameters: 25,174,528
+MUON: 100%|██████████| 4000/4000 [03:31<00:00, 18.91it/s, loss=0.4998, acc=0.882, ppl=1.6, lr=9.08e-03]    
+  ⏱️ Training completed in 211.5 seconds
+
+  📊 Final - Loss: 0.1644, Acc: 0.9604, PPL: 1.18
+
+📊 MUON Run 2/2
+
+🚀 Training MUON on Medium (Run 2)
+🌱 Set all seeds to 1042
+  📊 Total parameters: 50,340,352
+  Muon parameters: 25,165,824
+  AdamW parameters: 25,174,528
+MUON: 100%|██████████| 4000/4000 [03:31<00:00, 18.91it/s, loss=0.4573, acc=0.890, ppl=1.6, lr=9.08e-03]    
+  ⏱️ Training completed in 211.5 seconds
+
+  📊 Final - Loss: 0.1575, Acc: 0.9624, PPL: 1.17
+
+================================================================================
+🔬 TESTING LARGE MODEL
+   Architecture: 768d, 10L, 16H, 3072ff
+   Training: 3000 steps, batch size 12
+   Data: 500,000 tokens, seq_len 512
+================================================================================
+📦 Loading cached data from data_cache/tokenized_data_2000_500000.pkl
+✅ Loaded 2000 documents, 500,000 tokens from cache
+
+📊 ADAMW Run 1/2
+
+🚀 Training ADAMW on Large (Run 1)
+🌱 Set all seeds to 42
+  📊 Total parameters: 108,543,744
+ADAMW: 100%|██████████| 3000/3000 [03:25<00:00, 14.61it/s, loss=4.1460, acc=0.249, ppl=63.2, lr=2.73e-03]  
+  ⏱️ Training completed in 205.3 seconds
+
+  📊 Final - Loss: 3.8141, Acc: 0.2791, PPL: 45.33
+
+📊 ADAMW Run 2/2
+
+🚀 Training ADAMW on Large (Run 2)
+🌱 Set all seeds to 1042
+  📊 Total parameters: 108,543,744
+ADAMW: 100%|██████████| 3000/3000 [03:25<00:00, 14.62it/s, loss=4.1773, acc=0.247, ppl=65.2, lr=2.73e-03]  
+  ⏱️ Training completed in 205.2 seconds
+
+  📊 Final - Loss: 3.7074, Acc: 0.2878, PPL: 40.75
+
+📊 MUON Run 1/2
+
+🚀 Training MUON on Large (Run 1)
+🌱 Set all seeds to 42
+  📊 Total parameters: 108,543,744
+  Muon parameters: 70,778,880
+  AdamW parameters: 37,764,864
+MUON: 100%|██████████| 3000/3000 [03:35<00:00, 13.91it/s, loss=0.5369, acc=0.858, ppl=1.7, lr=9.09e-03]    
+  ⏱️ Training completed in 215.7 seconds
+
+  📊 Final - Loss: 0.2260, Acc: 0.9453, PPL: 1.25
+
+📊 MUON Run 2/2
+
+🚀 Training MUON on Large (Run 2)
+🌱 Set all seeds to 1042
+  📊 Total parameters: 108,543,744
+  Muon parameters: 70,778,880
+  AdamW parameters: 37,764,864
+MUON: 100%|██████████| 3000/3000 [03:35<00:00, 13.90it/s, loss=0.4284, acc=0.901, ppl=1.5, lr=9.09e-03]    
+  ⏱️ Training completed in 215.8 seconds
+
+  📊 Final - Loss: 0.2161, Acc: 0.9475, PPL: 1.24
+
+💾 Saving comprehensive results to results/comprehensive_ablation_20250721_205356
+✅ Comprehensive results saved to results/comprehensive_ablation_20250721_205356
+
+🎉 COMPREHENSIVE ABLATION COMPLETED!
+⏱️ Total time: 1.1 hours
+📊 Results saved to: results/comprehensive_ablation_20250721_205356
+✅ Check the generated plots and comprehensive report for detailed analysis
+🔬 All data cached for future analysis
+
+📋 QUICK SUMMARY:
+  Tiny: AdamW wins (-1.33% accuracy improvement)
+  Small: Muon wins (+1.36% accuracy improvement)
+  Medium: Muon wins (+4.80% accuracy improvement)
+  Large: Muon wins (+233.88% accuracy improvement)

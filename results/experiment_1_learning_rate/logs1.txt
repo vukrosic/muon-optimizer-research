@@ -1,0 +1,59 @@
+==================================================
+🔵 TESTING ADAMW
+==================================================
+🚀 ADAMW LR=1e-05
+🌱 Set all seeds to 42
+  ✅ LR 1e-05: Final Loss=8.459477424621582, Val Acc=0.070
+🚀 ADAMW LR=3e-05
+🌱 Set all seeds to 42
+  ✅ LR 3e-05: Final Loss=6.6022467613220215, Val Acc=0.183
+🚀 ADAMW LR=0.0001
+🌱 Set all seeds to 42
+  ✅ LR 0.0001: Final Loss=4.173043251037598, Val Acc=0.371
+🚀 ADAMW LR=0.0003
+🌱 Set all seeds to 42
+  ✅ LR 0.0003: Final Loss=1.478623628616333, Val Acc=0.777
+🚀 ADAMW LR=0.001
+🌱 Set all seeds to 42
+  ✅ LR 0.001: Final Loss=0.16272294521331787, Val Acc=0.968
+🚀 ADAMW LR=0.003
+🌱 Set all seeds to 42
+  ✅ LR 0.003: Final Loss=0.12793155014514923, Val Acc=0.972
+🚀 ADAMW LR=0.01
+🌱 Set all seeds to 42
+  ✅ LR 0.01: Final Loss=3.3094286918640137, Val Acc=0.284
+
+==================================================
+🔴 TESTING MUON
+==================================================
+🚀 MUON LR=0.001
+🌱 Set all seeds to 42
+  ✅ LR 0.001: Final Loss=3.733657121658325, Val Acc=0.430
+🚀 MUON LR=0.003
+🌱 Set all seeds to 42
+  ✅ LR 0.003: Final Loss=0.5717266798019409, Val Acc=0.953
+🚀 MUON LR=0.005
+🌱 Set all seeds to 42
+  ✅ LR 0.005: Final Loss=0.13839775323867798, Val Acc=0.983
+🚀 MUON LR=0.01
+🌱 Set all seeds to 42
+  ✅ LR 0.01: Final Loss=0.08118744194507599, Val Acc=0.984
+🚀 MUON LR=0.015
+🌱 Set all seeds to 42
+  ✅ LR 0.015: Final Loss=0.08615727722644806, Val Acc=0.983
+🚀 MUON LR=0.02
+🌱 Set all seeds to 42
+  ✅ LR 0.02: Final Loss=0.09520182758569717, Val Acc=0.980
+🚀 MUON LR=0.03
+🌱 Set all seeds to 42
+  ✅ LR 0.03: Final Loss=0.09264008700847626, Val Acc=0.980
+🚀 MUON LR=0.05
+🌱 Set all seeds to 42
+  ✅ LR 0.05: Final Loss=0.1162719801068306, Val Acc=0.974
+
+💾 Saving results to results/lr_search_20250721_182518
+✅ All results saved to results/lr_search_20250721_182518
+
+🎉 LEARNING RATE SEARCH COMPLETED IN 20.1 MINUTES!
+✅ Results saved to 'results/' folder
+📊 Check the generated plots and report for optimal learning rates
