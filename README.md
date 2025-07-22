@@ -1,4 +1,4 @@
-# Scaling Dynamics of Muon versus AdamW: An Empirical Analysis of Optimizer Performance in Transformer Language Models
+# Muon vs AdamW: Learning Rate And Scaling Small LLMs
 
 🚀 **TL;DR**: Muon optimizer shows superior robustness and scaling performance over AdamW! 🔥  
 🧠 **Gradient orthogonalization** makes Muon resilient to hyperparameter choices 🎯  
@@ -42,12 +42,12 @@ wget https://raw.githubusercontent.com/vukrosic/muon-optimizer-research/main/muo
 
 ## 📄 Full Paper
 
-This repository contains the complete LaTeX source for our empirical study:
+This repository contains the complete LaTeX source, code and PDF report for our empirical study:
 
-**"Scaling Dynamics of Muon versus AdamW: An Empirical Analysis of Optimizer Performance in Transformer Language Models"**
+**"Muon vs AdamW: Learning Rate And Scaling Small LLMs"**
 
 > **Authors**: Vuk Rosić (Óbuda University), Claude (Anthropic)  
-> **Date**: July 21, 2025
+> **Date**: July 22, 2025
 
 ## 🧪 Methodology
 
@@ -75,7 +75,7 @@ This repository contains the complete LaTeX source for our empirical study:
 ├── results/                        # 📈 All plots and figures
 │   ├── experiment_1_learning_rate/
 │   └── experiment_2_model_size/
-├── main.tex                       # 📄 Full LaTeX paper
+├── muon_vs_adamw_for_llms.tex     # 📄 Full LaTeX paper
 └── README.md                      # 📖 You're here!
 ```
 
@@ -90,7 +90,7 @@ This repository contains the complete LaTeX source for our empirical study:
 
 ```bibtex
 @misc{rosic2025muon,
-  title={Scaling Dynamics of Muon versus AdamW: An Empirical Analysis of Optimizer Performance in Transformer Language Models},
+  title={Muon vs AdamW: Learning Rate And Scaling Small LLMs},
   author={Rosić, Vuk and Claude},
   year={2025},
   url={https://github.com/vukrosic/muon-optimizer-research}
