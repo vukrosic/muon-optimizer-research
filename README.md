@@ -25,6 +25,8 @@
 ### Recommended: High-Performance Training with Novita AI
 [**Novita AI RTX 4090**](https://novita.ai/?ref=mjqyndm&utm_source=affiliate) - **4x faster** than free Colab! You lose nothing, I get 10% commission to support more research like this! 
 
+All code is in `muon_vs_adamw_for_llms.ipynb`, so you just need that.
+
 ### Alternative: Google Colab (Free)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/vukrosic/muon-optimizer-research/blob/main/muon_vs_adamw_for_llms.ipynb)
 
