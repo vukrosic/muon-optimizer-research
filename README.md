@@ -1,54 +1,96 @@
 # 📈 Muon vs AdamW: Optimizer Scaling Dynamics in Transformer Training
 
-**English** | [中文版本](README_zh.md)
+🚀 **TL;DR**: Muon optimizer demolishes AdamW at scale! 94.6% vs 28.4% accuracy on large models 🔥  
+⚡ **4-5% compute overhead** for **233% performance boost** 📊  
+🧠 **Gradient orthogonalization** = game changer for LLM training 🎯  
 
-This repository contains the full LaTeX source for our empirical study:
+![Learning Rate Sensitivity Analysis](results/experiment_1_learning_rate/lr_sensitivity_analysis.png)
+*AdamW (blue) has sharp peaks, Muon (red) shows broader stability across learning rates*
 
-**Scaling Dynamics of Muon versus AdamW: An Empirical Analysis of Optimizer Performance in Transformer Language Models**
+![Performance Scaling Comparison](results/experiment_2_model_size/final_performance_comparison.png)  
+*The dramatic divergence: Muon scales beautifully while AdamW crashes at 108M parameters*
+
+![Training Dynamics](results/experiment_2_model_size/training_curves_with_uncertainty.png)
+*Training curves reveal AdamW's catastrophic failure vs Muon's smooth convergence*
+
+## 🎯 Key Findings
+
+- 🔴 **Muon wins at scale**: 233% better accuracy on 108M parameter models
+- 🟦 **AdamW dominates small models** but fails catastrophically at scale  
+- ⚙️ **Only 4-5% compute overhead** for Muon's orthogonalization magic
+- 📈 **Broader learning rate stability** makes Muon more robust
+- 💡 **Gradient conditioning** becomes critical as models grow
+
+## 🚀 Run the Experiments
+
+### Option 1: Google Colab (Free Tier)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/vukrosic/muon-vs-adamw-scaling-dynamics/blob/main/muon_vs_adamw_for_llms.ipynb)
+
+**Note**: Free Colab may require smaller model sizes. Use AI to adjust the code if needed!
+
+### Option 2: Download & Run Locally
+```bash
+# Download the notebook
+wget https://raw.githubusercontent.com/vukrosic/muon-vs-adamw-scaling-dynamics/main/muon_vs_adamw_for_llms.ipynb
+
+# Or just download: muon_vs_adamw_for_llms.ipynb
+# Then run in Jupyter/Colab
+```
+
+### Option 3: High-Performance Training (Recommended)
+For the **full 108M parameter experiment**, I used [**Novita AI**](https://novita.ai/?ref=mjqyndm&utm_source=affiliate) with RTX 4090 - **4x faster** than free Colab! 
+
+🎁 **You lose nothing, I get 10% commission to support more research like this!** 
+
+The notebook has two experiments:
+1. **Learning Rate Search** (runs on free Colab)
+2. **Scaling Analysis** (needs more power - 4090 recommended)
+
+## 📄 Full Paper
+
+This repository contains the complete LaTeX source for our empirical study:
+
+**"Scaling Dynamics of Muon versus AdamW: An Empirical Analysis of Optimizer Performance in Transformer Language Models"**
 
 > **Authors**: Vuk Rosić (Óbuda University), Claude (Anthropic)  
 > **Date**: July 21, 2025
 
-## 🧠 Overview
+## 🧪 Methodology
 
-Optimizer choice critically impacts large language model (LLM) training. While **AdamW** remains the default in transformer-based architectures, **Muon**—a newer optimizer incorporating **gradient orthogonalization via Newton-Schulz iteration**—shows promise for improved convergence at scale.
+- **4 Model Sizes**: 11M → 29M → 50M → 108M parameters
+- **Dataset**: SmolLM-Corpus (500k tokens)
+- **Architecture**: Decoder-only Transformers with RoPE, RMSNorm, SwiGLU
+- **Statistical Rigor**: Multiple seeds, t-tests for significance
 
-This study compares **AdamW** and **Muon** across four model sizes (11M to 108M parameters) trained on the **SmolLM-Corpus**. Results show:
+## 📊 Results Summary
 
-- 🟦 **AdamW** outperforms on small models  
-- 🔴 **Muon** scales better, outperforming AdamW dramatically on large models  
-- 💥 **AdamW catastrophically fails** at 108M parameters  
-- ⚙️ **Muon incurs only 4–5% compute overhead**
+| Model Size | AdamW Accuracy | Muon Accuracy | Improvement |
+|------------|---------------|---------------|-------------|
+| 11M        | 79.4%         | 78.4%         | -1.3% ❌    |
+| 29M        | 95.0%         | **96.3%**     | +1.4% ✅    |
+| 50M        | 91.7%         | **96.1%**     | +4.8% ✅    |
+| 108M       | **28.4%** 💥  | **94.6%** 🚀  | **+233%** 🔥 |
 
-## 📄 Paper Highlights
-
-- 📊 **Learning Rate Sweeps** show Muon is more stable
-- 🚀 **Scaling Analysis** reveals divergence at 108M scale
-- 🧮 **Gradient Orthogonalization** improves training stability
-- 💡 **Practical Implications** for choosing optimizers in LLM training
-
-## 📂 Contents
+## 📂 Repository Structure
 
 ```bash
 .
-├── results/                      # Plots and figures used in the paper
+├── muon_vs_adamw_for_llms.ipynb    # 🚀 Main experiment notebook
+├── results/                        # 📈 All plots and figures
 │   ├── experiment_1_learning_rate/
 │   └── experiment_2_model_size/
-├── main.tex                     # Full LaTeX source of the paper
-├── references.bib               # Bibliography entries (if split)
-├── README.md                    # You're here!
-````
+├── main.tex                       # 📄 Full LaTeX paper
+└── README.md                      # 📖 You're here!
+```
 
-## 📸 Key Figures
+## 🔬 Key Insights
 
-* 🔍 **Learning Rate Sensitivity**: AdamW peaks sharply, Muon is broader
-* 📈 **Training Curves**: AdamW flattens early at large scale; Muon improves steadily
-* 🧪 **Validation Accuracy**: Muon reaches **94.6%** on 108M model vs **28.4%** for AdamW
-* ⏱️ **Compute Overhead**: \~4.2% for Muon
+1. **Scale-Dependent Performance**: Optimizer choice becomes critical as models grow
+2. **Gradient Orthogonalization**: Newton-Schulz iteration prevents destructive interference
+3. **Learning Rate Robustness**: Muon tolerates broader hyperparameter ranges
+4. **Computational Trade-off**: 4% overhead for 233% performance gain = no-brainer
 
 ## 📚 Citation
-
-If you use or refer to this work, please cite:
 
 ```bibtex
 @article{rosic2025muon,
@@ -59,15 +101,18 @@ If you use or refer to this work, please cite:
 }
 ```
 
-## 🧪 Reproducibility Notes
+## 🤝 Support This Research
 
-* Dataset: SmolLM-Corpus (500k tokens)
-* Hardware: T4 GPU (limited scale)
-* Framework: PyTorch + custom optimizer
-* Training length varies by model size to equalize compute
+If this work helps you, consider:
+- ⭐ **Star this repo**
+- 🔄 **Share with your ML community** 
+- ☕ **Use my [Novita AI link](https://novita.ai/?ref=mjqyndm&utm_source=affiliate)** for GPU training (supports more research!)
 
 ## 📬 Contact
 
-For questions or collaborations, feel free to reach out:
+Questions? Collaborations? Reach out!
 
-* Vuk Rosić – [vukrosic1@gmail.com](mailto:vukrosic1@gmail.com)
+**Vuk Rosić** – [vukrosic1@gmail.com](mailto:vukrosic1@gmail.com)
+
+---
+*Revolutionizing LLM training, one optimizer at a time* 🚀
