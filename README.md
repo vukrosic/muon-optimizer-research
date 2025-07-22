@@ -1,5 +1,7 @@
 # Muon vs AdamW: Learning Rate And Scaling Small LLMs
 
+🌐 English | 🈶 [中文](README_zh.md)
+
 🚀 **TL;DR**: Muon optimizer shows superior robustness and scaling performance over AdamW! 🔥  
 🧠 **Gradient orthogonalization** makes Muon resilient to hyperparameter choices 🎯  
 
