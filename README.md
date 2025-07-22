@@ -1,14 +1,13 @@
 # Scaling Dynamics of Muon versus AdamW: An Empirical Analysis of Optimizer Performance in Transformer Language Models
 
-🚀 **TL;DR**: Muon optimizer shows superior robustness and scaling performance! 🔥  
-⚡ **4-5% compute overhead** for dramatically better large-scale training 📊  
+🚀 **TL;DR**: Muon optimizer shows superior robustness and scaling performance over AdamW! 🔥  
 🧠 **Gradient orthogonalization** makes Muon resilient to hyperparameter choices 🎯  
 
 ![Learning Rate Sensitivity Analysis](results/experiment_1_learning_rate/lr_sensitivity_analysis.png)
 *AdamW (blue) has sharp peaks, Muon (red) shows broader stability across learning rates*
 
 ![Performance Scaling Comparison](results/experiment_2_model_size/final_performance_comparison.png)  
-*Muon maintains strong performance across all scales while showing superior robustness*
+*Muon maintains strong performance with the same learning rate across multiple scales, showing superior robustness*
 
 ![Training Dynamics](results/experiment_2_model_size/training_curves_with_uncertainty.png)
 *The dramatic divergence: Muon scales beautifully while AdamW crashes at 108M parameters due to sensitivity to a wrong learning rate*
