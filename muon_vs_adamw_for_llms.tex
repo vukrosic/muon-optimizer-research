@@ -36,10 +36,29 @@
 \begin{abstract}
 Optimizer selection critically impacts the training dynamics and final performance of large language models. While AdamW remains the predominant choice, recent innovations like Muon—which incorporates gradient orthogonalization via Newton-Schulz iteration—promise improved training stability and convergence. 
 
-We present a systematic empirical comparison across four Transformer architectures (11M to 108M parameters) trained on SmolLM-Corpus. Our study reveals a pronounced scale-dependent performance divergence: Muon demonstrates modest improvements on smaller models but achieves dramatic superiority on larger architectures. Notably, on our 108M parameter model, Muon attains 94.6\% validation accuracy while AdamW fails catastrophically at 28.4\%—a 233\% relative improvement. 
+We present a systematic empirical comparison across four Transformer LLM sizes (11M to 108M parameters) trained on SmolLM-Corpus. Our study reveals a pronounced scale-dependent performance divergence: Muon demonstrates modest improvements on smaller models but achieves dramatic superiority on larger architectures. Notably, on our 108M parameter model, Muon attains 94.6\% validation accuracy while AdamW fails catastrophically at 28.4\%—a 233\% relative improvement, showing that AdamW is a lot more sensitive to a suboptimal learning rate, while Muon tolerates larger range of learning rates.
 
-Despite a 4-5\% computational overhead per training step, Muon's superior convergence properties and scaling robustness position it as a compelling alternative to AdamW, particularly for large-scale language model training. These findings underscore the critical importance of optimizer choice in the scaling regime and suggest that gradient conditioning techniques merit broader adoption in large-scale neural network training.
+Despite a 4-5\% computational overhead per training step, possibly because AdamW implementation by PyTorch is more optimized, Muon’s strong convergence and ability to scale well make it a promising alternative to AdamW, especially for training large language models. These results highlight how important it is to choose the right optimizer when working at scale, and suggest that techniques like gradient conditioning should be more widely used in large neural network training.
 \end{abstract}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{results/experiment_1_learning_rate/lr_sensitivity_analysis.png}
+        \caption{Learning rate sensitivity comparison}
+        \label{fig:preview_lr}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{results/experiment_2_model_size/final_performance_comparison.png}
+        \caption{Performance across model scales}
+        \label{fig:preview_scaling}
+    \end{subfigure}
+    \caption{Key experimental results preview: (a) Muon demonstrates broader learning rate stability compared to AdamW's sharp performance peaks, and (b) dramatic performance divergence emerges at larger model scales, with Muon achieving 94.6\% validation accuracy on 108M parameters while AdamW fails catastrophically at 28.4\%. Detailed analysis follows in subsequent sections.}
+    \label{fig:results_preview}
+\end{figure}
 
 \section{Introduction}
 
@@ -100,33 +119,6 @@ All experiments utilize decoder-only Transformer architectures with the followin
     \item \textbf{Weight Tying:} Shared parameters between embedding and output projection layers
 \end{itemize}
 
-\subsection{Optimizer Configurations}
-
-\subsubsection{AdamW Implementation}
-We employ the standard AdamW formulation with decoupled weight decay:
-\begin{align}
-    m_t &= \beta_1 m_{t-1} + (1-\beta_1) g_t \\
-    v_t &= \beta_2 v_{t-1} + (1-\beta_2) g_t^2 \\
-    \hat{m}_t &= \frac{m_t}{1-\beta_1^t}, \quad \hat{v}_t = \frac{v_t}{1-\beta_2^t} \\
-    \theta_{t+1} &= \theta_t - \eta \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon} - \lambda \theta_t
-\end{align}
-
-where $\beta_1 = 0.9$, $\beta_2 = 0.999$, $\epsilon = 10^{-8}$, and $\lambda$ represents the weight decay coefficient.
-
-\subsubsection{Muon Implementation}
-For core weight matrices, Muon applies orthogonalized momentum updates:
-\begin{align}
-    m_t &= \beta m_{t-1} + (1-\beta) g_t \\
-    \tilde{g}_t &= \text{NewtonSchulz}(m_t) \\
-    \theta_{t+1} &= \theta_t - \eta \sqrt{\max\left(1, \frac{d_{\text{out}}}{d_{\text{in}}}\right)} \tilde{g}_t
-\end{align}
-
-The Newton-Schulz iteration iteratively computes:
-\begin{equation}
-    X_{k+1} = \frac{1}{2}X_k(3I - X_k^T X_k)
-\end{equation}
-converging to an orthogonal matrix when initialized appropriately.
-
 \subsection{Experimental Protocols}
 
 \subsubsection{Phase 1: Learning Rate Optimization}
@@ -159,13 +151,13 @@ Large  & 768  & 10 & 16 & 3072  & 108.5M & 3000 \\
 
 Training employs 500,000 tokens with sequence length 512, dropout rate 0.1, and dual random seeds (42, 1042) for statistical validation.
 
-\textbf{Potential Limitation:} We acknowledge that using learning rates optimized on a 256-dimensional model for all scales may not be ideal, particularly for the large 768-dimensional model where different learning rate scaling laws might apply.
+\textbf{Potential Limitation:} We acknowledge that using learning rates optimized on a 256-dimensional model for all scales may not be ideal, particularly for the large 768-dimensional model where different learning rate scaling laws might apply. We suspect this to be the reason for AdamW's failure, however, this also shows robustness of Muon.
 
 \section{Results}
 
 \subsection{Learning Rate Sensitivity Analysis}
 
-Figure \ref{fig:lr_sensitivity} demonstrates distinct optimization landscapes for the two algorithms. AdamW exhibits peak performance at $3 \times 10^{-3}$ with rapid degradation at higher learning rates, while Muon achieves optimal results at $10^{-2}$ with broader stability across the tested range.
+Figure \ref{fig:lr_sensitivity} (below) demonstrates distinct optimization landscapes for the two algorithms. AdamW exhibits peak performance at $3 \times 10^{-3}$ with rapid degradation at higher learning rates, while Muon achieves optimal results at $10^{-2}$ with broader stability across the tested range.
 
 \begin{figure}[H]
     \centering
