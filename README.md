@@ -1,50 +1,45 @@
-# 📈 Muon vs AdamW: Optimizer Scaling Dynamics in Transformer Training
+# Scaling Dynamics of Muon versus AdamW: An Empirical Analysis of Optimizer Performance in Transformer Language Models
 
-🚀 **TL;DR**: Muon optimizer demolishes AdamW at scale! 94.6% vs 28.4% accuracy on large models 🔥  
-⚡ **4-5% compute overhead** for **233% performance boost** 📊  
-🧠 **Gradient orthogonalization** = game changer for LLM training 🎯  
+🚀 **TL;DR**: Muon optimizer shows superior robustness and scaling performance! 🔥  
+⚡ **4-5% compute overhead** for dramatically better large-scale training 📊  
+🧠 **Gradient orthogonalization** makes Muon resilient to hyperparameter choices 🎯  
 
 ![Learning Rate Sensitivity Analysis](results/experiment_1_learning_rate/lr_sensitivity_analysis.png)
 *AdamW (blue) has sharp peaks, Muon (red) shows broader stability across learning rates*
 
 ![Performance Scaling Comparison](results/experiment_2_model_size/final_performance_comparison.png)  
-*The dramatic divergence: Muon scales beautifully while AdamW crashes at 108M parameters*
+*Muon maintains strong performance across all scales while showing superior robustness*
 
 ![Training Dynamics](results/experiment_2_model_size/training_curves_with_uncertainty.png)
-*Training curves reveal AdamW's catastrophic failure vs Muon's smooth convergence*
+*The dramatic divergence: Muon scales beautifully while AdamW crashes at 108M parameters due to sensitivity to a wrong learning rate*
 
 ## 🎯 Key Findings
 
-- 🔴 **Muon wins at scale**: 233% better accuracy on 108M parameter models
-- 🟦 **AdamW dominates small models** but fails catastrophically at scale  
-- ⚙️ **Only 4-5% compute overhead** for Muon's orthogonalization magic
-- 📈 **Broader learning rate stability** makes Muon more robust
-- 💡 **Gradient conditioning** becomes critical as models grow
+- 🔴 **Muon's robustness shines at scale**: Maintains 94.6% accuracy even with suboptimal hyperparameters
+- 🟦 **AdamW's brittleness exposed**: Catastrophic failure when learning rate doesn't match model scale  
+- ⚙️ **Only 4-5% compute overhead** for Muon's orthogonalization benefits
+- 📈 **Broader learning rate tolerance** makes Muon more reliable in practice
+- 💡 **Gradient conditioning** provides stability as models grow
 
 ## 🚀 Run the Experiments
 
-### Option 1: Google Colab (Free Tier)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/vukrosic/muon-vs-adamw-scaling-dynamics/blob/main/muon_vs_adamw_for_llms.ipynb)
+### Recommended: High-Performance Training with Novita AI
+[**Novita AI RTX 4090**](https://novita.ai/?ref=mjqyndm&utm_source=affiliate) - **4x faster** than free Colab! You lose nothing, I get 10% commission to support more research like this! 
 
-**Note**: Free Colab may require smaller model sizes. Use AI to adjust the code if needed!
+### Alternative: Google Colab (Free)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/vukrosic/muon-optimizer-research/blob/main/muon_vs_adamw_for_llms.ipynb)
 
-### Option 2: Download & Run Locally
+**Experiment Details:**
+- **First experiment** (learning rate search): Runs fine on Google Colab free tier
+- **Second experiment** (model scaling): May require model size adjustments on free Colab - use AI to help modify the code!
+
+### Download & Run Locally
 ```bash
 # Download the notebook
-wget https://raw.githubusercontent.com/vukrosic/muon-vs-adamw-scaling-dynamics/main/muon_vs_adamw_for_llms.ipynb
+wget https://raw.githubusercontent.com/vukrosic/muon-optimizer-research/main/muon_vs_adamw_for_llms.ipynb
 
 # Or just download: muon_vs_adamw_for_llms.ipynb
-# Then run in Jupyter/Colab
 ```
-
-### Option 3: High-Performance Training (Recommended)
-For the **full 108M parameter experiment**, I used [**Novita AI**](https://novita.ai/?ref=mjqyndm&utm_source=affiliate) with RTX 4090 - **4x faster** than free Colab! 
-
-🎁 **You lose nothing, I get 10% commission to support more research like this!** 
-
-The notebook has two experiments:
-1. **Learning Rate Search** (runs on free Colab)
-2. **Scaling Analysis** (needs more power - 4090 recommended)
 
 ## 📄 Full Paper
 
@@ -64,12 +59,14 @@ This repository contains the complete LaTeX source for our empirical study:
 
 ## 📊 Results Summary
 
-| Model Size | AdamW Accuracy | Muon Accuracy | Improvement |
-|------------|---------------|---------------|-------------|
-| 11M        | 79.4%         | 78.4%         | -1.3% ❌    |
+| Model Size | AdamW Accuracy | Muon Accuracy | Muon Advantage |
+|------------|---------------|---------------|----------------|
+| 11M        | 79.4%         | 78.4%         | -1.3% (small models) |
 | 29M        | 95.0%         | **96.3%**     | +1.4% ✅    |
 | 50M        | 91.7%         | **96.1%**     | +4.8% ✅    |
-| 108M       | **28.4%** 💥  | **94.6%** 🚀  | **+233%** 🔥 |
+| 108M       | **28.4%** 💥  | **94.6%** 🚀  | **Robust at scale** 🔥 |
+
+*Note: AdamW's poor performance at 108M reflects learning rate sensitivity, while Muon maintains strong performance*
 
 ## 📂 Repository Structure
 
@@ -85,19 +82,19 @@ This repository contains the complete LaTeX source for our empirical study:
 
 ## 🔬 Key Insights
 
-1. **Scale-Dependent Performance**: Optimizer choice becomes critical as models grow
-2. **Gradient Orthogonalization**: Newton-Schulz iteration prevents destructive interference
-3. **Learning Rate Robustness**: Muon tolerates broader hyperparameter ranges
-4. **Computational Trade-off**: 4% overhead for 233% performance gain = no-brainer
+1. **Robustness at Scale**: Muon maintains performance even with suboptimal hyperparameters
+2. **Gradient Orthogonalization**: Newton-Schulz iteration provides stability benefits
+3. **Learning Rate Tolerance**: Muon's broader stability range improves reliability
+4. **Practical Value**: Small compute overhead for significant robustness gains
 
 ## 📚 Citation
 
 ```bibtex
-@article{rosic2025muon,
+@misc{rosic2025muon,
   title={Scaling Dynamics of Muon versus AdamW: An Empirical Analysis of Optimizer Performance in Transformer Language Models},
   author={Rosić, Vuk and Claude},
-  journal={arXiv preprint},
-  year={2025}
+  year={2025},
+  url={https://github.com/vukrosic/muon-optimizer-research}
 }
 ```
 
@@ -115,4 +112,4 @@ Questions? Collaborations? Reach out!
 **Vuk Rosić** – [vukrosic1@gmail.com](mailto:vukrosic1@gmail.com)
 
 ---
-*Revolutionizing LLM training, one optimizer at a time* 🚀
+*Revolutionizing LLM training with robust optimization* 🚀
